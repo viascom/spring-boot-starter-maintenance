@@ -1,0 +1,49 @@
+plugins {
+    id "idea"
+    id "java-library"
+    id "org.jetbrains.kotlin.jvm" version "1.6.0"
+    id "org.springframework.boot" version "2.6.1"
+	id "io.spring.dependency-management" version "1.0.11.RELEASE"
+}
+
+group "io.viascom"
+version "0.0.1"
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+springBoot {
+    buildInfo()
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
+
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    developmentOnly "org.springframework.boot:spring-boot-devtools"
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "11"
+    }
+}
