@@ -1,0 +1,6 @@
+maintenance:
+  enabled: false
+  roles:
+    - MAINTAINER
+    - ADMIN
+  events: false

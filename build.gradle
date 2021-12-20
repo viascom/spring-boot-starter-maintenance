@@ -1,13 +1,18 @@
 plugins {
     id "idea"
     id "java-library"
+    id "maven-publish"
     id "org.jetbrains.kotlin.jvm" version "1.6.10"
+    id "org.jetbrains.kotlin.kapt" version "1.5.0"
     id "org.springframework.boot" version "2.6.1"
 	id "io.spring.dependency-management" version "1.0.11.RELEASE"
 }
 
-group "io.viascom"
+group "io.viascom.devutils"
 version "0.0.1"
+
+tasks.bootJar {enabled = false}
+tasks.jar {enabled = true}
 
 java {
     toolchain {
@@ -23,17 +28,23 @@ repositories {
     mavenCentral()
 }
 
-ext {
-
-}
-
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "org.jetbrains.kotlin:kotlin-reflect"
 
+    implementation "com.google.code.gson:gson:2.8.9"
+
+    compileOnly "org.springframework.boot:spring-boot-starter-web"
+    compileOnly "org.springframework.boot:spring-boot-starter-security"
+
+    kapt "org.springframework.boot:spring-boot-configuration-processor"
+
     testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.springframework.boot:spring-boot-starter-web"
+    testImplementation "org.springframework.boot:spring-boot-starter-security"
+
     developmentOnly "org.springframework.boot:spring-boot-devtools"
 }
 
@@ -45,5 +56,12 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions {
         freeCompilerArgs = ["-Xjsr305=strict"]
         jvmTarget = "11"
+    }
+}
+
+classes {
+    doLast {
+        // Copy generated spring-configuration-metadata.json into jar resources
+        file("build/tmp/kapt3/classes/main/META-INF/spring-configuration-metadata.json").renameTo(file("build/resources/main/META-INF/spring-configuration-metadata.json"))
     }
 }
