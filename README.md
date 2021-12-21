@@ -60,7 +60,7 @@ See also the list of [contributors](https://github.com/viascom/spring-boot-start
 
 ### License
 
-spring-boot-starter-maintenance is released under [The Unlicense](LICENSE).
+spring-boot-starter-maintenance is released under the [Unlicense](LICENSE).
 
 ```
 This is free and unencumbered software released into the public domain.
