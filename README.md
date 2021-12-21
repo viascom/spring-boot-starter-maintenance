@@ -24,6 +24,21 @@ Maven:
 
 ![Build Status](https://github.com/viascom/spring-boot-starter-maintenance/actions/workflows/gradle-ci.yml/badge.svg)
 
+### Versioning 🔖 [![GitHub release](https://img.shields.io/github/release/viascom/spring-boot-starter-maintenance/all?logo=GitHub)](https://github.com/viascom/spring-boot-starter-maintenance/releases/latest)
+
+This project is developed by [Viascom](https://github.com/viascom) using the [Semantic Versioning specification](https://semver.org). For the versions available, see the [releases on this repository](https://github.com/viascom/spring-boot-starter-maintenance/releases).
+
+### Change log 📝
+
+See the [CHANGELOG](CHANGELOG.md) file for details.
+
+### Authors 🖥️
+
+* **Nikola Stanković** - *Initial work* - [botscripter](https://github.com/botscripter)
+* **Patrick Bösch** - *Initial work* - [itsmefox](https://github.com/itsmefox)
+
+See also the list of [contributors](https://github.com/viascom/spring-boot-starter-maintenance/contributors) who participated in this project. 💕
+
 ### License
 
 spring-boot-starter-maintenance is released under [The Unlicense](LICENSE).
