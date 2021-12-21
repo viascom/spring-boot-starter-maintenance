@@ -26,9 +26,6 @@ open class MaintenanceAutoConfiguration(
 
     private val log = LoggerFactory.getLogger(javaClass)
 
-    @Autowired
-    lateinit var context: ConfigurableApplicationContext
-
     @Bean
     @ConditionalOnMissingBean
     open fun maintenanceConfig(): MaintenanceConfig {

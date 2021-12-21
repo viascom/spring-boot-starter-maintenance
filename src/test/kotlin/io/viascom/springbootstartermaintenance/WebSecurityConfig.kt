@@ -2,6 +2,7 @@ package io.viascom.springbootstartermaintenance
 
 import io.viascom.springbootstartermaintenance.library.DefaultMaintenanceAccessDeniedHandler
 import io.viascom.springbootstartermaintenance.library.DefaultMaintenanceRequestMatcher
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
@@ -13,9 +14,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Order(10)
 @Configuration
 @EnableWebSecurity
-open class WebSecurityConfig(
-    private val maintenanceRequestMatcher: DefaultMaintenanceRequestMatcher
-) : WebSecurityConfigurerAdapter() {
+open class WebSecurityConfig : WebSecurityConfigurerAdapter() {
+
+    @Autowired
+    lateinit var maintenanceRequestMatcher: DefaultMaintenanceRequestMatcher
 
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.inMemoryAuthentication()
