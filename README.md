@@ -16,7 +16,7 @@ Maven:
 <dependency>
   <groupId>io.viascom.devutils</groupId>
   <artifactId>spring-boot-starter-maintenance</artifactId>
-  <version>0.0.1/version>
+  <version>0.0.1</version>
 </dependency>
 ```
 
