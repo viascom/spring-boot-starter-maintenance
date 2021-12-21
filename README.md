@@ -26,18 +26,18 @@ Maven:
 
 Open your implemenatation of the WebSecurityConfigurerAdapter (f.e. named WebSecurityConfig) and add the following three parts:
 
-Step 1: Autowire the DefaultMaintenanceRequestMatcher
+**Step 1:** Autowire the DefaultMaintenanceRequestMatcher
 ```java
 @Autowired
 private DefaultMaintenanceRequestMatcher maintenanceRequestMatcher;
 ```
 
-Step 2: Add a request matcher
+**Step 2:** Add a request matcher
 ```java
 .requestMatchers(maintenanceRequestMatcher).denyAll()
 ```
 
-Step 3: Add a access denie handler
+**Step 3:** Add a access denie handler
 ```java
 .exceptionHandling().accessDeniedHandler(DefaultMaintenanceAccessDeniedHandler())
 ```
