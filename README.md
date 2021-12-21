@@ -34,12 +34,12 @@ private DefaultMaintenanceRequestMatcher maintenanceRequestMatcher;
 
 Step 2: Add a request matcher
 ```java
-.requestMatchers(maintenanceRequestMatcher).denyAll();
+.requestMatchers(maintenanceRequestMatcher).denyAll()
 ```
 
 Step 3: Add a access denie handler
 ```java
-.exceptionHandling().accessDeniedHandler(DefaultMaintenanceAccessDeniedHandler());
+.exceptionHandling().accessDeniedHandler(DefaultMaintenanceAccessDeniedHandler())
 ```
 
 
