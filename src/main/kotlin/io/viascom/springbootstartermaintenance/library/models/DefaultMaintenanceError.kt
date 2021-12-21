@@ -1,10 +1,10 @@
 package io.viascom.springbootstartermaintenance.library.models
 
-import com.google.gson.annotations.SerializedName
+import com.fasterxml.jackson.annotation.JsonProperty
 
 class DefaultMaintenanceError(
-    @SerializedName("error_code")
+    @JsonProperty("error_code")
     val errorCode: Int,
-    @SerializedName("error_message")
+    @JsonProperty("error_message")
     val errorMessage: String
 )

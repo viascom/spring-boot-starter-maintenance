@@ -1,6 +1,6 @@
 package io.viascom.springbootstartermaintenance.library
 
-import com.google.gson.Gson
+import com.fasterxml.jackson.databind.ObjectMapper
 import io.viascom.springbootstartermaintenance.library.models.DefaultMaintenanceError
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -16,7 +16,8 @@ open class DefaultMaintenanceAccessDeniedHandler() : AccessDeniedHandler {
         accessDeniedException: org.springframework.security.access.AccessDeniedException
     ) {
 
-        val responseJson = Gson().toJson(
+        val jsonMapper = ObjectMapper()
+        val responseJson = jsonMapper.writeValueAsString(
             DefaultMaintenanceError(
                 HttpStatus.SERVICE_UNAVAILABLE.value(),
                 "Service unavailable. Service is currently under maintenance! Please try again later ..."
