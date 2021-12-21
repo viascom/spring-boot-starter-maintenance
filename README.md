@@ -2,6 +2,8 @@
 
 spring-boot-starter-maintenance is a maintenance mode library for spring boot web and security projects.
 
+---
+
 ### Download
 
 Gradle:
@@ -21,6 +23,8 @@ Maven:
 ```
 
 [spring-boot-starter-maintenance jar downloads](https://maven-badges.herokuapp.com/maven-central/io.viascom.devutils/spring-boot-starter-maintenance) are available from Maven Central.
+
+---
 
 ### Getting Started
 
@@ -42,14 +46,19 @@ private DefaultMaintenanceRequestMatcher maintenanceRequestMatcher;
 .exceptionHandling().accessDeniedHandler(DefaultMaintenanceAccessDeniedHandler())
 ```
 
+---
 
 ### Versioning 🔖 [![GitHub release](https://img.shields.io/github/release/viascom/spring-boot-starter-maintenance/all?logo=GitHub)](https://github.com/viascom/spring-boot-starter-maintenance/releases/latest)
 
 This project is developed by [Viascom](https://github.com/viascom) using the [Semantic Versioning specification](https://semver.org). For the versions available, see the [releases on this repository](https://github.com/viascom/spring-boot-starter-maintenance/releases).
 
+---
+
 ### Change log 📝
 
 See the [CHANGELOG](CHANGELOG.md) file for details.
+
+---
 
 ### Authors 🖥️
 
@@ -57,6 +66,8 @@ See the [CHANGELOG](CHANGELOG.md) file for details.
 * **Patrick Bösch** - *Initial work* - [itsmefox](https://github.com/itsmefox)
 
 See also the list of [contributors](https://github.com/viascom/spring-boot-starter-maintenance/contributors) who participated in this project. 💕
+
+---
 
 ### License
 
