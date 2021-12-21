@@ -2,6 +2,7 @@ plugins {
     id "idea"
     id "java-library"
     id "maven-publish"
+    id "signing"
     id "org.jetbrains.kotlin.jvm" version "1.6.10"
     id "org.jetbrains.kotlin.kapt" version "1.5.0"
     id "org.springframework.boot" version "2.6.1"
@@ -9,12 +10,14 @@ plugins {
 }
 
 group "io.viascom.devutils"
-version "0.0.1"
+version "0.0.1-SNAPSHOT"
 
 tasks.bootJar {enabled = false}
 tasks.jar {enabled = true}
 
 java {
+    withJavadocJar()
+    withSourcesJar()
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
     }
@@ -60,4 +63,69 @@ classes {
         // Copy generated spring-configuration-metadata.json into jar resources
         file("build/tmp/kapt3/classes/main/META-INF/spring-configuration-metadata.json").renameTo(file("build/resources/main/META-INF/spring-configuration-metadata.json"))
     }
+}
+
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+
+publishing {
+    repositories {
+        maven {
+            def releaseRepo = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            url = isReleaseVersion ? releaseRepo : snapshotRepo
+            credentials {
+                username = project.hasProperty('ossrhUsername') ? ossrhUsername : "Unknown user"
+                password = project.hasProperty('ossrhPassword') ? ossrhPassword : "Unknown password"
+            }
+        }
+    }
+
+    publications {
+        mavenJava(MavenPublication) {
+            pom {
+                groupId = 'io.viascom.devutils'
+                name = 'spring-boot-starter-maintenance'
+                description = 'Maintenance mode library for spring boot web and security projects.'
+                url = 'https://github.com/viascom/spring-boot-starter-maintenance'
+                packaging = 'jar'
+
+                from components.java
+
+                licenses {
+                    license {
+                        name = 'The Unlicense'
+                        url = 'https://unlicense.org/'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:git@github.com:viascom/spring-boot-starter-maintenance.git'
+                    developerConnection = 'scm:git:git@github.com:viascom/spring-boot-starter-maintenance.git'
+                    url = 'https://github.com/viascom/spring-boot-starter-maintenance'
+                }
+
+                developers {
+                    developer {
+                        id = 'botscripter'
+                        name = 'Nikola Stankovic'
+                        email = 'nikola.stankovic@viascom.email'
+                        organizationUrl = 'https://viascom.io/'
+                    }
+                    developer {
+                        id = 'itsmefox'
+                        name = 'Patrick Bösch'
+                        email = 'patrick.boesch@viascom.email'
+                        organizationUrl = 'https://viascom.io/'
+                    }
+                }
+            }
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+tasks.withType(Sign) {
+    onlyIf { isReleaseVersion }
 }
