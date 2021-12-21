@@ -1,4 +1,4 @@
-# spring-boot-starter-maintenance
+# spring-boot-starter-maintenance ![Build Status](https://github.com/viascom/spring-boot-starter-maintenance/actions/workflows/gradle-ci.yml/badge.svg)
 
 spring-boot-starter-maintenance is a maintenance mode library for spring boot web and security projects.
 
@@ -22,7 +22,26 @@ Maven:
 
 [spring-boot-starter-maintenance jar downloads](https://maven-badges.herokuapp.com/maven-central/io.viascom.devutils/spring-boot-starter-maintenance) are available from Maven Central.
 
-![Build Status](https://github.com/viascom/spring-boot-starter-maintenance/actions/workflows/gradle-ci.yml/badge.svg)
+### Getting Started
+
+Open your implemenatation of the WebSecurityConfigurerAdapter (f.e. named WebSecurityConfig) and add the following three parts:
+
+Step 1: Autowire the DefaultMaintenanceRequestMatcher
+```java
+@Autowired
+private DefaultMaintenanceRequestMatcher maintenanceRequestMatcher;
+```
+
+Step 2: Add a request matcher
+```java
+.requestMatchers(maintenanceRequestMatcher).denyAll()
+```
+
+Step 3: Add a access denie handler
+```java
+.exceptionHandling().accessDeniedHandler(DefaultMaintenanceAccessDeniedHandler());
+```
+
 
 ### Versioning 🔖 [![GitHub release](https://img.shields.io/github/release/viascom/spring-boot-starter-maintenance/all?logo=GitHub)](https://github.com/viascom/spring-boot-starter-maintenance/releases/latest)
 
