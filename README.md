@@ -7,7 +7,7 @@ spring-boot-starter-maintenance is a maintenance mode library for spring boot we
 Gradle:
 ```gradle
 dependencies {
-  implementation 'io.viascom.devutils:spring-boot-starter-maintenance:1.0.0'
+  implementation 'io.viascom.devutils:spring-boot-starter-maintenance:0.0.1'
 }
 ```
 
@@ -16,7 +16,7 @@ Maven:
 <dependency>
   <groupId>io.viascom.devutils</groupId>
   <artifactId>spring-boot-starter-maintenance</artifactId>
-  <version>1.0.0</version>
+  <version>0.0.1/version>
 </dependency>
 ```
 
