@@ -1,4 +1,4 @@
-package io.viascom.springbootstartermaintenance.library.events
+package io.viascom.devutils.springbootstartermaintenance.core.event
 
 import org.slf4j.LoggerFactory
 import org.springframework.context.ApplicationEventPublisher
@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component
 
 
 @Component
-class MaintenanceEventPublisher(
+open class MaintenanceEventPublisher(
     private val applicationEventPublisher: ApplicationEventPublisher
 ) {
 

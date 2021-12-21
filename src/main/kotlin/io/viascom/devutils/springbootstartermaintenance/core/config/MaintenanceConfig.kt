@@ -1,4 +1,4 @@
-package io.viascom.springbootstartermaintenance.library
+package io.viascom.devutils.springbootstartermaintenance.core.config
 
 interface MaintenanceConfig {
     fun getEnabled(): Boolean

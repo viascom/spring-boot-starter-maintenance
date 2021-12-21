@@ -1,7 +1,7 @@
-package io.viascom.springbootstartermaintenance
+package io.viascom.devutils.springbootstartermaintenance
 
 
-import io.viascom.springbootstartermaintenance.library.Maintenance
+import io.viascom.devutils.springbootstartermaintenance.core.Maintenance
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner

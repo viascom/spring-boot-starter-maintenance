@@ -1,17 +1,15 @@
-package io.viascom.springbootstartermaintenance
+package io.viascom.devutils.springbootstartermaintenance
 
-import io.viascom.springbootstartermaintenance.library.DefaultMaintenanceAccessDeniedHandler
-import io.viascom.springbootstartermaintenance.library.DefaultMaintenanceRequestMatcher
+import io.viascom.devutils.springbootstartermaintenance.core.DefaultMaintenanceAccessDeniedHandler
+import io.viascom.devutils.springbootstartermaintenance.core.DefaultMaintenanceRequestMatcher
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
-import org.springframework.core.annotation.Order
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 
 
-@Order(10)
 @Configuration
 @EnableWebSecurity
 open class WebSecurityConfig : WebSecurityConfigurerAdapter() {

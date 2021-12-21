@@ -1,11 +1,12 @@
-package io.viascom.springbootstartermaintenance.library
+package io.viascom.devutils.springbootstartermaintenance.core
 
-import io.viascom.springbootstartermaintenance.library.events.MaintenanceAction
-import io.viascom.springbootstartermaintenance.library.events.MaintenanceEventPublisher
+import io.viascom.devutils.springbootstartermaintenance.core.config.MaintenanceConfig
+import io.viascom.devutils.springbootstartermaintenance.core.event.MaintenanceAction
+import io.viascom.devutils.springbootstartermaintenance.core.event.MaintenanceEventPublisher
 import org.springframework.stereotype.Service
 
 @Service
-class Maintenance(
+open class Maintenance(
     private val maintenanceConfig: MaintenanceConfig,
     private val maintenanceEventPublisher: MaintenanceEventPublisher
 ) {

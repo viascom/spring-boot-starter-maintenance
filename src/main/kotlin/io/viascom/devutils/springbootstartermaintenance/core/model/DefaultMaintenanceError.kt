@@ -1,8 +1,8 @@
-package io.viascom.springbootstartermaintenance.library.models
+package io.viascom.devutils.springbootstartermaintenance.core.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-class DefaultMaintenanceError(
+open class DefaultMaintenanceError(
     @JsonProperty("error_code")
     val errorCode: Int,
     @JsonProperty("error_message")

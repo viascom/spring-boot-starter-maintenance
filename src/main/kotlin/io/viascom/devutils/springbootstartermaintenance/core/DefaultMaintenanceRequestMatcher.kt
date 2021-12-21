@@ -1,5 +1,6 @@
-package io.viascom.springbootstartermaintenance.library
+package io.viascom.devutils.springbootstartermaintenance.core
 
+import io.viascom.devutils.springbootstartermaintenance.core.config.MaintenanceConfig
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.util.matcher.RequestMatcher

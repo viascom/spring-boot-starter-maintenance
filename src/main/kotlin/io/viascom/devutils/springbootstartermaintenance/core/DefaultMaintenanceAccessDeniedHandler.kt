@@ -1,7 +1,7 @@
-package io.viascom.springbootstartermaintenance.library
+package io.viascom.devutils.springbootstartermaintenance.core
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import io.viascom.springbootstartermaintenance.library.models.DefaultMaintenanceError
+import io.viascom.devutils.springbootstartermaintenance.core.model.DefaultMaintenanceError
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.security.web.access.AccessDeniedHandler

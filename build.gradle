@@ -16,6 +16,11 @@ version gitVersion()
 tasks.bootJar {enabled = false}
 tasks.jar {enabled = true}
 
+jar {
+    // Remove `plain` postfix from jar file name
+    archiveClassifier.set("")
+}
+
 java {
     withJavadocJar()
     withSourcesJar()

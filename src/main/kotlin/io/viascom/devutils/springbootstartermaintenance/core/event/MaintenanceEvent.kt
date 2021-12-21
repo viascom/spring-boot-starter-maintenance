@@ -1,4 +1,4 @@
-package io.viascom.springbootstartermaintenance.library.events
+package io.viascom.devutils.springbootstartermaintenance.core.event
 
 import org.springframework.context.ApplicationEvent
 

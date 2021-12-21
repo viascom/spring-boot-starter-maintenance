@@ -1,7 +1,14 @@
-package io.viascom.springbootstartermaintenance.autoconfigurer
+package io.viascom.devutils.springbootstartermaintenance.autoconfiguration
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
+/**
+ *  Maintenance configuration properties
+ *
+ *  This class contains all the available properties with descriptions to configure this
+ *  maintenance mode library. Registering itself under the keyword "maintenance". All properties
+ *  can be set in the application configuration files.
+ */
 @ConfigurationProperties(prefix = "maintenance")
 open class MaintenanceProperties {
 

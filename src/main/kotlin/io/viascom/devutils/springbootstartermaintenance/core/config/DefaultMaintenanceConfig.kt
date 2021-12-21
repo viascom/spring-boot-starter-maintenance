@@ -1,6 +1,6 @@
-package io.viascom.springbootstartermaintenance.library
+package io.viascom.devutils.springbootstartermaintenance.core.config
 
-import io.viascom.springbootstartermaintenance.autoconfigurer.MaintenanceProperties
+import io.viascom.devutils.springbootstartermaintenance.autoconfiguration.MaintenanceProperties
 
 open class DefaultMaintenanceConfig(
     maintenanceProperties: MaintenanceProperties
