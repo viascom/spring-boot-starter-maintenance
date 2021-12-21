@@ -20,7 +20,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @ConditionalOnWebApplication
 @ConditionalOnBean(WebSecurityConfigurerAdapter::class)
 @EnableConfigurationProperties(MaintenanceProperties::class)
-@ComponentScan(basePackages = ["io.viascom.springbootstartermaintenance.*"])
+@ComponentScan(basePackages = ["io.viascom.devutils.springbootstartermaintenance.*"])
 open class MaintenanceAutoConfiguration(
     private val maintenanceProperties: MaintenanceProperties
 ) {
