@@ -54,7 +54,7 @@ private Maintenance maintenance;
 // The following actions are exyecutabel
 maintenance.start()
 maintenance.stop()
-maintenance.status()
+maintenance.state()
 ```
 
 ---
