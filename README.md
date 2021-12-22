@@ -51,7 +51,7 @@ private DefaultMaintenanceRequestMatcher maintenanceRequestMatcher;
 @Autowired
 private Maintenance maintenance;
 
-// The following actions are exyecutabel
+// The following actions are executable
 maintenance.start()
 maintenance.stop()
 maintenance.state()
