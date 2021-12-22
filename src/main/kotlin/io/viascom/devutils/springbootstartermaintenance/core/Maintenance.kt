@@ -32,7 +32,7 @@ open class Maintenance(
         }
     }
 
-    fun status(): Boolean {
+    fun state(): Boolean {
         return maintenanceConfig.getEnabled()
     }
 }
