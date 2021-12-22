@@ -1,7 +1,8 @@
 package io.viascom.devutils.springbootstartermaintenance.autoconfiguration
 
+import io.viascom.devutils.springbootstartermaintenance.core.DefaultMaintenanceAccessDeniedHandler
+import io.viascom.devutils.springbootstartermaintenance.core.DefaultMaintenanceRequestMatcher
 import io.viascom.devutils.springbootstartermaintenance.core.config.DefaultMaintenanceConfig
-import io.viascom.devutils.springbootstartermaintenance.core.config.MaintenanceConfig
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
@@ -22,16 +23,25 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableConfigurationProperties(MaintenanceProperties::class)
 @ComponentScan(basePackages = ["io.viascom.devutils.springbootstartermaintenance.*"])
 open class MaintenanceAutoConfiguration(
-    private val maintenanceProperties: MaintenanceProperties
+    private val properties: MaintenanceProperties
 ) {
-
     private val log = LoggerFactory.getLogger(javaClass)
 
     @Bean
     @ConditionalOnMissingBean
-    open fun maintenanceConfig(): MaintenanceConfig {
-        val config = DefaultMaintenanceConfig(maintenanceProperties)
-        log.info("Initialized maintenance mode with state: ${config.getEnabled()}")
-        return config
+    open fun defaultMaintenanceConfig(): DefaultMaintenanceConfig {
+        return DefaultMaintenanceConfig(properties)
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    open fun defaultMaintenanceRequestMatcher(): DefaultMaintenanceRequestMatcher {
+        return DefaultMaintenanceRequestMatcher(defaultMaintenanceConfig())
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    open fun defaultMaintenanceAccessDeniedHandler(): DefaultMaintenanceAccessDeniedHandler {
+        return DefaultMaintenanceAccessDeniedHandler()
     }
 }

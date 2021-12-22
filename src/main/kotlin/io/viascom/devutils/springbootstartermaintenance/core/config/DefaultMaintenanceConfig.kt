@@ -1,14 +1,17 @@
 package io.viascom.devutils.springbootstartermaintenance.core.config
 
 import io.viascom.devutils.springbootstartermaintenance.autoconfiguration.MaintenanceProperties
+import org.slf4j.LoggerFactory
 
 open class DefaultMaintenanceConfig(
-    maintenanceProperties: MaintenanceProperties
+    properties: MaintenanceProperties
 ) : MaintenanceConfig {
 
-    private var enabled: Boolean = maintenanceProperties.enabled
-    private var roles: ArrayList<String> = maintenanceProperties.roles
-    private var events: Boolean = maintenanceProperties.events
+    private val log = LoggerFactory.getLogger(javaClass)
+
+    private var enabled: Boolean = properties.enabled
+    private var roles: ArrayList<String> = properties.roles
+    private var publishEvents: Boolean = properties.publishEvents
 
     override fun getEnabled(): Boolean = this.enabled
 
@@ -22,9 +25,9 @@ open class DefaultMaintenanceConfig(
         this.roles = roles
     }
 
-    override fun getEvents(): Boolean = this.events
+    override fun getPublishEvents(): Boolean = this.publishEvents
 
-    override fun setEvents(enabled: Boolean) {
-        this.events = enabled
+    override fun setPublishEvents(enabled: Boolean) {
+        this.publishEvents = enabled
     }
 }

@@ -5,6 +5,6 @@ interface MaintenanceConfig {
     fun setEnabled(enabled: Boolean)
     fun getRoles(): ArrayList<String>
     fun setRoles(roles: ArrayList<String>)
-    fun getEvents(): Boolean
-    fun setEvents(enabled: Boolean)
+    fun getPublishEvents(): Boolean
+    fun setPublishEvents(enabled: Boolean)
 }

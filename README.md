@@ -43,7 +43,13 @@ private DefaultMaintenanceRequestMatcher maintenanceRequestMatcher;
 
 **Step 3:** Add a access denie handler
 ```java
-.exceptionHandling().accessDeniedHandler(DefaultMaintenanceAccessDeniedHandler())
+.exceptionHandling().accessDeniedHandler(new DefaultMaintenanceAccessDeniedHandler())
+```
+
+**Step 4 (Optionally):** Autowire the maintenance object to interact programmatically with the maintenance mode.
+```java
+@Autowired
+lateinit var maintenance: Maintenance
 ```
 
 ---

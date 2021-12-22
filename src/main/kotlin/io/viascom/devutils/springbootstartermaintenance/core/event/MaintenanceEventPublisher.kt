@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component
 open class MaintenanceEventPublisher(
     private val applicationEventPublisher: ApplicationEventPublisher
 ) {
-
     private val log = LoggerFactory.getLogger(javaClass)
 
     fun publishMaintenanceEvent(action: MaintenanceAction) {

@@ -19,11 +19,12 @@ open class MaintenanceProperties {
 
     /**
      * Roles to be allowed the access to the api during a maintenance.
+     * This property is case-sensitive.
      */
     var roles: ArrayList<String> = arrayListOf()
 
     /**
-     * Event publishing mechanism on. Default: true.
+     * Event publishing mechanism switch. Default: true.
      */
-    var events: Boolean = true
+    var publishEvents: Boolean = true
 }
