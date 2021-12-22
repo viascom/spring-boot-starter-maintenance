@@ -49,7 +49,10 @@ private DefaultMaintenanceRequestMatcher maintenanceRequestMatcher;
 **Step 4 (Optionally):** Autowire the maintenance object to interact programmatically with the maintenance mode.
 ```java
 @Autowired
-lateinit var maintenance: Maintenance
+private Maintenance maintenance;
+
+// The following actions are exyecutabel
+    maintenance.
 ```
 
 ---
