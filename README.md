@@ -52,7 +52,9 @@ private DefaultMaintenanceRequestMatcher maintenanceRequestMatcher;
 private Maintenance maintenance;
 
 // The following actions are exyecutabel
-    maintenance.
+maintenance.start()
+maintenance.stop()
+maintenance.status()
 ```
 
 ---
