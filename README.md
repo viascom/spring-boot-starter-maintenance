@@ -1,6 +1,13 @@
 # spring-boot-starter-maintenance ![Build Status](https://github.com/viascom/spring-boot-starter-maintenance/actions/workflows/gradle-ci.yml/badge.svg)
 
-spring-boot-starter-maintenance is a maintenance mode library for spring boot web and security projects.
+spring-boot-starter-maintenance is a maintenance mode library and auto-configuration for spring boot web and security projects.
+
+### Requirements
+
+spring-boot-starter-maintenance depends on the following two dependencies and will not start without them present.
+
+- org.springframework.boot:spring-boot-starter-web
+- org.springframework.boot:spring-boot-starter-security
 
 ---
 
