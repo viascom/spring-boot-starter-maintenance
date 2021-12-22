@@ -2,6 +2,8 @@
 
 spring-boot-starter-maintenance is a maintenance mode library and auto-configuration for spring boot web and security projects.
 
+With spring-boot-starter-maintenance anyone can easily enforce best practices during maintenance work on their applications. For example, every HTTP client will receive a response with status code 503 - Service Unavailable during maintenance. On top of that, the library provides an injection point for clean-up tasks and detailed statistics. Everything is customizable and extendable programmed in mind.
+
 ### Requirements
 
 spring-boot-starter-maintenance depends on the following two dependencies and will not start without them present.
