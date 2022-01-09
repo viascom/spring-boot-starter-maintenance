@@ -31,15 +31,6 @@ open class MaintenanceAutoConfiguration(private val properties: MaintenanceConfi
     @ConditionalOnMissingBean
     open fun maintenance(): Maintenance {
         log.debug("Initializing Maintenance Bean")
-        return Maintenance.Builder()
-            .properties(defaultMaintenanceConfig())
-            .build()
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    open fun defaultMaintenanceConfig(): MaintenanceProperties {
-        log.debug("Initializing DefaultMaintenanceConfig Bean")
-        return MaintenanceProperties(properties.enabled, properties.roles)
+        return Maintenance(MaintenanceProperties(properties.enabled, properties.roles))
     }
 }
