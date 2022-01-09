@@ -4,6 +4,8 @@ spring-boot-starter-maintenance is a maintenance mode library and auto-configura
 
 With spring-boot-starter-maintenance anyone can easily enforce best practices during maintenance work on their applications. For example, every HTTP client will receive a response with status code 503 - Service Unavailable during maintenance. On top of that, the library provides an injection point for clean-up tasks and detailed statistics. Everything is customizable and extendable programmed in mind.
 
+---
+
 ### Requirements
 
 spring-boot-starter-maintenance depends on the following two dependencies and will not start without them present.
@@ -37,33 +39,22 @@ Maven:
 
 ### Getting Started
 
-Open your implemenatation of the WebSecurityConfigurerAdapter (f.e. named WebSecurityConfig) and add the following three parts:
+Open your implementation of the WebSecurityConfigurerAdapter (f.e. named WebSecurityConfig) and add the following three parts:
 
-**Step 1:** Autowire the DefaultMaintenanceRequestMatcher
+**Step 1:** Autowire maintenance
 ```java
 @Autowired
-private DefaultMaintenanceRequestMatcher maintenanceRequestMatcher;
+private Maintenance maintenance;
 ```
 
 **Step 2:** Add a request matcher
 ```java
-.requestMatchers(maintenanceRequestMatcher).denyAll()
+.requestMatchers(DefaultMaintenanceRequestMatcher(maintenance)).denyAll()
 ```
 
 **Step 3:** Add a access denie handler
 ```java
-.exceptionHandling().accessDeniedHandler(new DefaultMaintenanceAccessDeniedHandler())
-```
-
-**Step 4 (Optionally):** Autowire the maintenance object to interact programmatically with the maintenance mode.
-```java
-@Autowired
-private Maintenance maintenance;
-
-// The following actions are executable
-maintenance.start()
-maintenance.stop()
-maintenance.state()
+.exceptionHandling().accessDeniedHandler(DefaultMaintenanceAccessDeniedHandler(maintenance))
 ```
 
 ---

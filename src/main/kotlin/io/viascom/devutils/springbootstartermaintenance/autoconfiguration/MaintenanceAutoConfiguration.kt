@@ -1,8 +1,7 @@
 package io.viascom.devutils.springbootstartermaintenance.autoconfiguration
 
-import io.viascom.devutils.springbootstartermaintenance.core.DefaultMaintenanceAccessDeniedHandler
-import io.viascom.devutils.springbootstartermaintenance.core.DefaultMaintenanceRequestMatcher
-import io.viascom.devutils.springbootstartermaintenance.core.config.DefaultMaintenanceConfig
+import io.viascom.devutils.springbootstartermaintenance.core.Maintenance
+import io.viascom.devutils.springbootstartermaintenance.core.config.MaintenanceProperties
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
@@ -11,6 +10,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Scope
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
 
 /**
@@ -20,28 +20,40 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @ConditionalOnWebApplication
 @ConditionalOnBean(WebSecurityConfigurerAdapter::class)
-@EnableConfigurationProperties(MaintenanceProperties::class)
+@EnableConfigurationProperties(MaintenanceConfigurationProperties::class)
 @ComponentScan(basePackages = ["io.viascom.devutils.springbootstartermaintenance.*"])
-open class MaintenanceAutoConfiguration(
-    private val properties: MaintenanceProperties
-) {
+open class MaintenanceAutoConfiguration(private val properties: MaintenanceConfigurationProperties) {
+
     private val log = LoggerFactory.getLogger(javaClass)
 
     @Bean
+    @Scope("singleton")
     @ConditionalOnMissingBean
-    open fun defaultMaintenanceConfig(): DefaultMaintenanceConfig {
-        return DefaultMaintenanceConfig(properties)
+    open fun maintenance(): Maintenance {
+        log.debug("Initializing Maintenance Bean")
+        return Maintenance.Builder()
+            .properties(defaultMaintenanceConfig())
+            .build()
     }
 
     @Bean
     @ConditionalOnMissingBean
-    open fun defaultMaintenanceRequestMatcher(): DefaultMaintenanceRequestMatcher {
-        return DefaultMaintenanceRequestMatcher(defaultMaintenanceConfig())
+    open fun defaultMaintenanceConfig(): MaintenanceProperties {
+        log.debug("Initializing DefaultMaintenanceConfig Bean")
+        return MaintenanceProperties(properties.enabled, properties.roles)
     }
 
-    @Bean
-    @ConditionalOnMissingBean
-    open fun defaultMaintenanceAccessDeniedHandler(): DefaultMaintenanceAccessDeniedHandler {
-        return DefaultMaintenanceAccessDeniedHandler()
-    }
+//    @Bean
+//    @ConditionalOnMissingBean
+//    open fun defaultMaintenanceRequestMatcher(): DefaultMaintenanceRequestMatcher {
+//        log.debug("Initializing DefaultMaintenanceRequestMatcher Bean")
+//        return DefaultMaintenanceRequestMatcher(defaultMaintenanceConfig())
+//    }
+//
+//    @Bean
+//    @ConditionalOnMissingBean
+//    open fun defaultMaintenanceAccessDeniedHandler(): DefaultMaintenanceAccessDeniedHandler {
+//        log.debug("Initializing DefaultMaintenanceAccessDeniedHandler Bean")
+//        return DefaultMaintenanceAccessDeniedHandler(maintenance())
+//    }
 }

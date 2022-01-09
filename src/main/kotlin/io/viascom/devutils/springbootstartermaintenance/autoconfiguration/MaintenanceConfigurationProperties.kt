@@ -10,7 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties
  *  can be set in the application configuration files.
  */
 @ConfigurationProperties(prefix = "maintenance")
-open class MaintenanceProperties {
+open class MaintenanceConfigurationProperties {
 
     /**
      * Maintenance mode initial state. Default: false.
@@ -23,8 +23,4 @@ open class MaintenanceProperties {
      */
     var roles: ArrayList<String> = arrayListOf()
 
-    /**
-     * Event publishing mechanism switch. Default: true.
-     */
-    var publishEvents: Boolean = true
 }
