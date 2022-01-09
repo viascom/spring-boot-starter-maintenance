@@ -42,18 +42,4 @@ open class MaintenanceAutoConfiguration(private val properties: MaintenanceConfi
         log.debug("Initializing DefaultMaintenanceConfig Bean")
         return MaintenanceProperties(properties.enabled, properties.roles)
     }
-
-//    @Bean
-//    @ConditionalOnMissingBean
-//    open fun defaultMaintenanceRequestMatcher(): DefaultMaintenanceRequestMatcher {
-//        log.debug("Initializing DefaultMaintenanceRequestMatcher Bean")
-//        return DefaultMaintenanceRequestMatcher(defaultMaintenanceConfig())
-//    }
-//
-//    @Bean
-//    @ConditionalOnMissingBean
-//    open fun defaultMaintenanceAccessDeniedHandler(): DefaultMaintenanceAccessDeniedHandler {
-//        log.debug("Initializing DefaultMaintenanceAccessDeniedHandler Bean")
-//        return DefaultMaintenanceAccessDeniedHandler(maintenance())
-//    }
 }
