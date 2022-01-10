@@ -14,12 +14,12 @@ open class DefaultMaintenanceRequestMatcher(private val maintenance: Maintenance
     override fun matches(request: HttpServletRequest): Boolean {
         val auth: Authentication = SecurityContextHolder.getContext().authentication
 
-        val roles = maintenance.properties.roles.map { "ROLE_$it" }
+        val roles = maintenance.roles.map { "ROLE_$it" }
         if (auth.authorities.any { roles.contains(it.authority) }) {
             log.debug("Access allowed for user ${auth.name} with registered role.")
             return false
         }
 
-        return maintenance.enabled
+        return maintenance.active
     }
 }

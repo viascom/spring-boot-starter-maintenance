@@ -30,7 +30,14 @@ open class MaintenanceAutoConfiguration(private val properties: MaintenanceConfi
     @Scope("singleton")
     @ConditionalOnMissingBean
     open fun maintenance(): Maintenance {
-        log.debug("Initializing Maintenance Bean")
-        return Maintenance(MaintenanceProperties(properties.enabled, properties.roles))
+        log.debug("Initializing Maintenance")
+        return Maintenance(
+            MaintenanceProperties(
+                properties.enabled,
+                properties.roles,
+                properties.autoClean,
+                properties.autoAlert
+            )
+        )
     }
 }

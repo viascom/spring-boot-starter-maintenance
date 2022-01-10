@@ -21,6 +21,18 @@ open class MaintenanceConfigurationProperties {
      * Roles to be allowed the access to the api during a maintenance.
      * This property is case-sensitive.
      */
-    var roles: ArrayList<String> = arrayListOf()
+    var roles: MutableList<String> = arrayListOf()
+
+    /**
+     * If set to true, all classes implementing the MaintenanceCleaner
+     * interface will be run during the stop maintenance process.
+     */
+    var autoClean: Boolean = false
+
+    /**
+     * If set to true, all classes implementing the MaintenanceAlert
+     * interface will be run during the start maintenance process.
+     */
+    var autoAlert: Boolean = false
 
 }

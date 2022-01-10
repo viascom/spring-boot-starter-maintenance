@@ -42,7 +42,7 @@ open class DefaultMaintenanceAccessDeniedHandler(private val maintenance: Mainte
     private fun setRetryAfterHeader(response: HttpServletResponse) {
         val startTime = maintenance.start
         val endTime = maintenance.end
-        if (startTime != null && endTime != null) {
+        if (endTime != null) {
             val duration = Duration.between(startTime, endTime).toSeconds()
             response.addHeader("Retry-After", duration.toString())
         } else {
