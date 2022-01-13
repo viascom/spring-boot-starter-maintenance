@@ -1,6 +1,5 @@
 package io.viascom.devutils.springbootstartermaintenance.core
 
-import io.github.classgraph.ClassGraph
 import io.viascom.devutils.springbootstartermaintenance.core.config.MaintenanceProperties
 import org.slf4j.LoggerFactory
 import java.time.LocalDateTime
@@ -12,7 +11,9 @@ open class Maintenance(
     var start: LocalDateTime = now(),
     var end: LocalDateTime? = null,
     var active: Boolean = false,
-    var roles: MutableList<String> = mutableListOf()
+    var roles: MutableList<String> = mutableListOf(),
+    private val alerts: List<MaintenanceAlert>,
+    private val cleaners: List<MaintenanceCleaner>
 ) {
 
     init {
@@ -63,31 +64,7 @@ open class Maintenance(
         return active
     }
 
-    fun clean() {
-        ClassGraph().enableAllInfo()
-            .scan().use { scanResult ->
-                val cleanerClasses = scanResult.getClassesImplementing("io.viascom.devutils.springbootstartermaintenance.core.MaintenanceCleaner")
-                val cleanerClassNames = cleanerClasses.names
-                log.debug(cleanerClassNames.joinToString())
+    fun clean() = cleaners.forEach { it.clean() }
 
-                cleanerClassNames.forEach {
-                    val instance: MaintenanceCleaner = Class.forName(it).getDeclaredConstructor().newInstance() as MaintenanceCleaner
-                    instance.clean()
-                }
-            }
-    }
-
-    fun alert() {
-        ClassGraph().enableAllInfo()
-            .scan().use { scanResult ->
-                val alertClasses = scanResult.getClassesImplementing("io.viascom.devutils.springbootstartermaintenance.core.MaintenanceAlert")
-                val alertClassNames = alertClasses.names
-                log.debug(alertClassNames.joinToString())
-
-                alertClassNames.forEach {
-                    val instance: MaintenanceAlert = Class.forName(it).getDeclaredConstructor().newInstance() as MaintenanceAlert
-                    instance.alert()
-                }
-            }
-    }
+    fun alert() = alerts.forEach { it.alert() }
 }

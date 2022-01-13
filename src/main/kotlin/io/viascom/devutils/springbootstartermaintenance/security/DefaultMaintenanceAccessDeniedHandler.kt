@@ -2,7 +2,7 @@ package io.viascom.devutils.springbootstartermaintenance.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.viascom.devutils.springbootstartermaintenance.core.Maintenance
-import io.viascom.devutils.springbootstartermaintenance.core.model.DefaultMaintenanceError
+import io.viascom.devutils.springbootstartermaintenance.core.model.MaintenanceError
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -22,7 +22,7 @@ open class DefaultMaintenanceAccessDeniedHandler(private val maintenance: Mainte
     ) {
         val jsonMapper = ObjectMapper()
         val responseJson = jsonMapper.writeValueAsString(
-            DefaultMaintenanceError(
+            MaintenanceError(
                 HttpStatus.SERVICE_UNAVAILABLE.value(),
                 "Service temporarily unavailable. Service is currently under maintenance! Please try again later ..."
             )
