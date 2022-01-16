@@ -49,13 +49,27 @@ private Maintenance maintenance;
 
 **Step 2:** Add a request matcher
 ```java
-.requestMatchers(DefaultMaintenanceRequestMatcher(maintenance)).denyAll()
+.authorizeRequests()
+.requestMatchers(new DefaultMaintenanceRequestMatcher(maintenance)).denyAll()
 ```
 
 **Step 3:** Add a access denie handler
 ```java
-.exceptionHandling().accessDeniedHandler(DefaultMaintenanceAccessDeniedHandler(maintenance))
+.exceptionHandling().accessDeniedHandler(new DefaultMaintenanceAccessDeniedHandler(maintenance))
 ```
+
+---
+### Maintenance properties
+
+All properties can be accessed under the property `maintenance`.
+
+| Name    | Description                                                               | Default Value |
+|---------|---------------------------------------------------------------------------|---------------|
+| enabled | Enable maintenance mode.                                                  | false         |
+| roles   | Roles to be allowed the access to the app during a maintenance.           |               |
+| clean   | Automatically execute all MaintenanceCleaners at stop of the Maintenance. | false         |
+| alert   | Automatically execute all MaintenanceAlerts at start of the Maintenance.  | false         |
+| events  | Publish spring events for all actions.                                    | false         |
 
 ---
 

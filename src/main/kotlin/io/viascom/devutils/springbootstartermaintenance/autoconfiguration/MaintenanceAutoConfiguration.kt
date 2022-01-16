@@ -1,6 +1,8 @@
 package io.viascom.devutils.springbootstartermaintenance.autoconfiguration
 
 import io.viascom.devutils.springbootstartermaintenance.core.Maintenance
+import io.viascom.devutils.springbootstartermaintenance.core.MaintenanceAlert
+import io.viascom.devutils.springbootstartermaintenance.core.MaintenanceCleaner
 import io.viascom.devutils.springbootstartermaintenance.core.config.MaintenanceProperties
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
@@ -22,7 +24,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @ConditionalOnBean(WebSecurityConfigurerAdapter::class)
 @EnableConfigurationProperties(MaintenanceConfigurationProperties::class)
 @ComponentScan(basePackages = ["io.viascom.devutils.springbootstartermaintenance.*"])
-open class MaintenanceAutoConfiguration(private val properties: MaintenanceConfigurationProperties) {
+open class MaintenanceAutoConfiguration(
+    private val properties: MaintenanceConfigurationProperties,
+    private val alerts: List<MaintenanceAlert>,
+    private val cleaners: List<MaintenanceCleaner>
+) {
 
     private val log = LoggerFactory.getLogger(javaClass)
 
@@ -31,13 +37,20 @@ open class MaintenanceAutoConfiguration(private val properties: MaintenanceConfi
     @ConditionalOnMissingBean
     open fun maintenance(): Maintenance {
         log.debug("Initializing Maintenance")
+
+        if (properties.enabled) {
+            log.info("Maintenance mode enabled. Only users with configured roles will have access!")
+        }
+
         return Maintenance(
             MaintenanceProperties(
                 properties.enabled,
                 properties.roles,
-                properties.autoClean,
-                properties.autoAlert
-            )
+                properties.clean,
+                properties.alert
+            ),
+            alerts,
+            cleaners
         )
     }
 }

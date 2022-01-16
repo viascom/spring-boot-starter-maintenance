@@ -7,18 +7,22 @@ import java.time.LocalDateTime.now
 
 
 open class Maintenance(
-    private var properties: MaintenanceProperties,
-    var start: LocalDateTime = now(),
+    private val properties: MaintenanceProperties,
+    private val alerts: List<MaintenanceAlert>,
+    private val cleaners: List<MaintenanceCleaner>,
+    var start: LocalDateTime? = null,
     var end: LocalDateTime? = null,
     var active: Boolean = false,
-    var roles: MutableList<String> = mutableListOf(),
-    private val alerts: List<MaintenanceAlert>,
-    private val cleaners: List<MaintenanceCleaner>
+    var roles: MutableList<String> = mutableListOf()
 ) {
 
     init {
-        active = properties.enabled
-        roles = properties.roles
+        this.active = properties.enabled
+        this.roles = properties.roles
+
+        if (active) {
+            this.start = now()
+        }
     }
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -42,7 +46,7 @@ open class Maintenance(
             this.end = expectedEndTime
         }
 
-        if (alert == true || properties.autoAlert) {
+        if (alert == true || properties.alert) {
             alert()
         }
     }
@@ -54,12 +58,12 @@ open class Maintenance(
 
         this.end = now()
 
-        if (clean == true || properties.autoClean) {
+        if (clean == true || properties.clean) {
             clean()
         }
     }
 
-    fun state(): Boolean {
+    fun state(): Boolean? {
         log.info("Maintenance state is $active")
         return active
     }
