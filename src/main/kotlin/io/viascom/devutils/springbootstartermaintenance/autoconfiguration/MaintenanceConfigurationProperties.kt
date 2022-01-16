@@ -35,4 +35,9 @@ open class MaintenanceConfigurationProperties {
      */
     var alert: Boolean = false
 
+    /**
+     * If set to true, spring events for enabling and disabling the
+     * maintenance mode will be published.
+     */
+    var events: Boolean = false
 }

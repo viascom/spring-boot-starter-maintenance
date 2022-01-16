@@ -70,6 +70,7 @@ All properties can be accessed under the property `maintenance`.
 | clean   | Automatically execute all MaintenanceCleaners at stop of the Maintenance. | false         |
 | alert   | Automatically execute all MaintenanceAlerts at start of the Maintenance.  | false         |
 | events  | Publish spring events for all actions.                                    | false         |
+| stats   | Enable persisting of maintenances and stats aggregation.                  | false         |
 
 ---
 

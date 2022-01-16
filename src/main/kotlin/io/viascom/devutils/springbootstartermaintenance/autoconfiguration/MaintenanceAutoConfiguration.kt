@@ -4,6 +4,7 @@ import io.viascom.devutils.springbootstartermaintenance.core.Maintenance
 import io.viascom.devutils.springbootstartermaintenance.core.MaintenanceAlert
 import io.viascom.devutils.springbootstartermaintenance.core.MaintenanceCleaner
 import io.viascom.devutils.springbootstartermaintenance.core.config.MaintenanceProperties
+import io.viascom.devutils.springbootstartermaintenance.core.event.MaintenanceEventPublisher
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
@@ -27,7 +28,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 open class MaintenanceAutoConfiguration(
     private val properties: MaintenanceConfigurationProperties,
     private val alerts: List<MaintenanceAlert>,
-    private val cleaners: List<MaintenanceCleaner>
+    private val cleaners: List<MaintenanceCleaner>,
+    private val eventPublisher: MaintenanceEventPublisher
 ) {
 
     private val log = LoggerFactory.getLogger(javaClass)
@@ -38,6 +40,10 @@ open class MaintenanceAutoConfiguration(
     open fun maintenance(): Maintenance {
         log.debug("Initializing Maintenance")
 
+        if (properties.events) {
+            log.debug("Maintenance events will be published.")
+        }
+
         if (properties.enabled) {
             log.info("Maintenance mode enabled. Only users with configured roles will have access!")
         }
@@ -47,10 +53,12 @@ open class MaintenanceAutoConfiguration(
                 properties.enabled,
                 properties.roles,
                 properties.clean,
-                properties.alert
+                properties.alert,
+                properties.events
             ),
             alerts,
-            cleaners
+            cleaners,
+            eventPublisher
         )
     }
 }
