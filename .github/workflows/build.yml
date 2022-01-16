@@ -1,4 +1,4 @@
-name: Gradle CI
+name: Build
 
 on:
   push:
@@ -29,6 +29,9 @@ jobs:
           distribution: 'adopt'
           java-version: 11
           architecture: x64
+
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
