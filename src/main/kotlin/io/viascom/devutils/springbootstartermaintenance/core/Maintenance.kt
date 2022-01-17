@@ -2,7 +2,7 @@ package io.viascom.devutils.springbootstartermaintenance.core
 
 import io.viascom.devutils.springbootstartermaintenance.core.config.MaintenanceProperties
 import io.viascom.devutils.springbootstartermaintenance.core.event.MaintenanceEventPublisher
-import io.viascom.devutils.springbootstartermaintenance.core.event.MaintenanceState
+import io.viascom.devutils.springbootstartermaintenance.core.model.MaintenanceState
 import org.slf4j.LoggerFactory
 import java.time.LocalDateTime
 import java.time.LocalDateTime.now
@@ -12,13 +12,13 @@ open class Maintenance(
     private val properties: MaintenanceProperties,
     private val alerts: List<MaintenanceAlert>,
     private val cleaners: List<MaintenanceCleaner>,
-    private val eventPublisher: MaintenanceEventPublisher,
+    private val maintenanceEventPublisher: MaintenanceEventPublisher,
+    private var state: MaintenanceState = MaintenanceState.DISABLED,
     var start: LocalDateTime? = null,
     var end: LocalDateTime? = null,
     var active: Boolean = false,
     var roles: MutableList<String> = mutableListOf(),
-    var events: Boolean = false,
-    private var state: MaintenanceState = MaintenanceState.DISABLED
+    var events: Boolean = false
 ) {
 
     init {
@@ -45,18 +45,11 @@ open class Maintenance(
 
         log.info("Maintenance mode $state")
 
-        if (startTime != null) {
-            this.start = startTime
-        } else {
-            this.start = now()
-        }
-
-        if (expectedEndTime != null) {
-            this.end = expectedEndTime
-        }
+        this.start = startTime ?: now()
+        expectedEndTime?.let { this.end = it }
 
         if (events) {
-            eventPublisher.publishMaintenanceEvent(MaintenanceState.ENABLED)
+            maintenanceEventPublisher.publish(MaintenanceState.ENABLED)
         }
 
         if (alert == true || properties.alert) {
@@ -74,7 +67,7 @@ open class Maintenance(
         this.end = now()
 
         if (events) {
-            eventPublisher.publishMaintenanceEvent(MaintenanceState.DISABLED)
+            maintenanceEventPublisher.publish(MaintenanceState.DISABLED)
         }
 
         if (clean == true || properties.clean) {
@@ -87,7 +80,9 @@ open class Maintenance(
         return state
     }
 
+    @Suppress
     fun clean() = cleaners.forEach { it.clean() }
 
+    @Suppress
     fun alert() = alerts.forEach { it.alert() }
 }

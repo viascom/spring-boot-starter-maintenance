@@ -16,15 +16,12 @@ open class DefaultMaintenanceAccessDeniedHandler(private val maintenance: Mainte
     private val log = LoggerFactory.getLogger(javaClass)
 
     override fun handle(
-        request: HttpServletRequest,
-        response: HttpServletResponse,
-        accessDeniedException: org.springframework.security.access.AccessDeniedException
+        request: HttpServletRequest, response: HttpServletResponse, accessDeniedException: org.springframework.security.access.AccessDeniedException
     ) {
         val jsonMapper = ObjectMapper()
         val responseJson = jsonMapper.writeValueAsString(
             MaintenanceError(
-                HttpStatus.SERVICE_UNAVAILABLE.value(),
-                "Service temporarily unavailable. Service is currently under maintenance! Please try again later ..."
+                HttpStatus.SERVICE_UNAVAILABLE.value(), "Service temporarily unavailable. Service is currently under maintenance! Please try again later ..."
             )
         )
 
@@ -42,11 +39,7 @@ open class DefaultMaintenanceAccessDeniedHandler(private val maintenance: Mainte
     private fun setRetryAfterHeader(response: HttpServletResponse) {
         val startTime = maintenance.start
         val endTime = maintenance.end
-        if (endTime != null) {
-            val duration = Duration.between(startTime, endTime).toSeconds()
-            response.addHeader("Retry-After", duration.toString())
-        } else {
-            response.addHeader("Retry-After", "60")
-        }
+        val durationInSeconds = endTime?.let { Duration.between(startTime, it).toSeconds() } ?: 60
+        response.addHeader("Retry-After", durationInSeconds.toString())
     }
 }

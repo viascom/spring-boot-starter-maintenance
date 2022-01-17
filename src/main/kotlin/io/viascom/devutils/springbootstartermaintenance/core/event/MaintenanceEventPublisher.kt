@@ -1,5 +1,6 @@
 package io.viascom.devutils.springbootstartermaintenance.core.event
 
+import io.viascom.devutils.springbootstartermaintenance.core.model.MaintenanceState
 import org.slf4j.LoggerFactory
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Component
@@ -11,7 +12,7 @@ class MaintenanceEventPublisher(
 
     private val log = LoggerFactory.getLogger(javaClass)
 
-    fun publishMaintenanceEvent(state: MaintenanceState) {
+    fun publish(state: MaintenanceState) {
         log.debug("Publishing maintenance event with state $state.")
         val maintenanceEvent = MaintenanceEvent(this, state)
         applicationEventPublisher.publishEvent(maintenanceEvent)
