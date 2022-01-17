@@ -12,7 +12,7 @@ class MaintenanceEventPublisher(
 
     private val log = LoggerFactory.getLogger(javaClass)
 
-    fun publishEvent(state: MaintenanceState) {
+    fun publish(state: MaintenanceState) {
         log.debug("Publishing maintenance event with state $state.")
         val maintenanceEvent = MaintenanceEvent(this, state)
         applicationEventPublisher.publishEvent(maintenanceEvent)

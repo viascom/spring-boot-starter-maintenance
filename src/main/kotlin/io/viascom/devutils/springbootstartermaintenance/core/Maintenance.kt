@@ -12,7 +12,7 @@ open class Maintenance(
     private val properties: MaintenanceProperties,
     private val alerts: List<MaintenanceAlert>,
     private val cleaners: List<MaintenanceCleaner>,
-    private val eventPublisher: MaintenanceEventPublisher,
+    private val maintenanceEventPublisher: MaintenanceEventPublisher,
     private var state: MaintenanceState = MaintenanceState.DISABLED,
     var start: LocalDateTime? = null,
     var end: LocalDateTime? = null,
@@ -49,7 +49,7 @@ open class Maintenance(
         expectedEndTime?.let { this.end = it }
 
         if (events) {
-            eventPublisher.publishEvent(MaintenanceState.ENABLED)
+            maintenanceEventPublisher.publish(MaintenanceState.ENABLED)
         }
 
         if (alert == true || properties.alert) {
@@ -67,7 +67,7 @@ open class Maintenance(
         this.end = now()
 
         if (events) {
-            eventPublisher.publishEvent(MaintenanceState.DISABLED)
+            maintenanceEventPublisher.publish(MaintenanceState.DISABLED)
         }
 
         if (clean == true || properties.clean) {
