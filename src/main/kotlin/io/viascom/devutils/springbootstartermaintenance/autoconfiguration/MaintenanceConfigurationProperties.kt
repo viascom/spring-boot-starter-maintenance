@@ -1,6 +1,7 @@
 package io.viascom.devutils.springbootstartermaintenance.autoconfiguration
 
 import org.springframework.boot.context.properties.ConfigurationProperties
+import java.time.Duration
 
 /**
  *  Maintenance configuration properties
@@ -13,7 +14,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 open class MaintenanceConfigurationProperties {
 
     /**
-     * Maintenance mode initial state. Default: false.
+     * Enable to instantiate the maintenance mode as active.
      */
     var enabled: Boolean = false
 
@@ -24,20 +25,23 @@ open class MaintenanceConfigurationProperties {
     var roles: MutableList<String> = arrayListOf()
 
     /**
-     * If set to true, all classes implementing the MaintenanceCleaner
-     * interface will be run during the stop maintenance process.
+     * Enable to run all classes implementing the MaintenanceCleaner interface during the stop maintenance process.
      */
     var clean: Boolean = false
 
     /**
-     * If set to true, all classes implementing the MaintenanceAlert
-     * interface will be run during the start maintenance process.
+     * Enable to run all classes implementing the MaintenanceAlert interface during the start maintenance process.
      */
     var alert: Boolean = false
 
     /**
-     * If set to true, spring events for enabling and disabling the
-     * maintenance mode will be published.
+     * Enable to publish spring events for enabling and disabling the maintenance mode.
      */
     var events: Boolean = false
+
+    /**
+     * Default value for the "Retry-After" response HTTP header,
+     * which is used in the DefaultMaintenanceAccessDeniedHandler.
+     */
+    var retryAfter: Duration = Duration.ofSeconds(60)
 }

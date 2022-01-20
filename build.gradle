@@ -37,7 +37,8 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
 
     compileOnly "org.springframework.boot:spring-boot-starter-web"
     compileOnly "org.springframework.boot:spring-boot-starter-security"
@@ -78,8 +79,8 @@ publishing {
             def snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
             url = isReleaseVersion ? releaseRepo : snapshotRepo
             credentials {
-                username findProperty("ossrhUsername") ?: System.getenv("MAVEN_USERNAME")
-                password findProperty("ossrhPassword") ?: System.getenv("MAVEN_PASSWORD")
+                username = findProperty("ossrhUsername") ?: System.getenv("MAVEN_USERNAME")
+                password = findProperty("ossrhPassword") ?: System.getenv("MAVEN_PASSWORD")
             }
         }
     }

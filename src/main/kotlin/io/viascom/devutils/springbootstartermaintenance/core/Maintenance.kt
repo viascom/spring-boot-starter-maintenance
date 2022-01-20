@@ -4,9 +4,9 @@ import io.viascom.devutils.springbootstartermaintenance.core.config.MaintenanceP
 import io.viascom.devutils.springbootstartermaintenance.core.event.MaintenanceEventPublisher
 import io.viascom.devutils.springbootstartermaintenance.core.model.MaintenanceState
 import org.slf4j.LoggerFactory
+import java.time.Duration
 import java.time.LocalDateTime
 import java.time.LocalDateTime.now
-
 
 open class Maintenance(
     private val properties: MaintenanceProperties,
@@ -18,13 +18,15 @@ open class Maintenance(
     var end: LocalDateTime? = null,
     var active: Boolean = false,
     var roles: MutableList<String> = mutableListOf(),
-    var events: Boolean = false
+    var events: Boolean = false,
+    var retryAfter: Duration = Duration.ofSeconds(60)
 ) {
 
     init {
         this.active = properties.enabled
         this.roles = properties.roles
         this.events = properties.events
+        this.retryAfter = properties.retryAfter
 
         if (active) {
             this.state = MaintenanceState.ENABLED
@@ -35,6 +37,7 @@ open class Maintenance(
     private val log = LoggerFactory.getLogger(javaClass)
 
     @JvmOverloads
+    @Suppress("unused")
     fun start(
         startTime: LocalDateTime? = now(),
         expectedEndTime: LocalDateTime? = null,
@@ -58,6 +61,7 @@ open class Maintenance(
     }
 
     @JvmOverloads
+    @Suppress("unused")
     fun stop(clean: Boolean? = false) {
         this.active = false
         this.state = MaintenanceState.DISABLED
@@ -75,6 +79,7 @@ open class Maintenance(
         }
     }
 
+    @Suppress("unused")
     fun state(): MaintenanceState {
         log.info("Maintenance mode $state")
         return state
