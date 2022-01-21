@@ -23,9 +23,9 @@ jar {
 java {
     withJavadocJar()
     withSourcesJar()
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
-    }
+
+    sourceCompatibility = 17
+    targetCompatibility = 1.8
 }
 
 springBoot {
@@ -59,7 +59,7 @@ test {
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     kotlinOptions {
         freeCompilerArgs = ["-Xjsr305=strict"]
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
 }
 
