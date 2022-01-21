@@ -43,5 +43,5 @@ open class MaintenanceConfigurationProperties {
      * Default value for the "Retry-After" response HTTP header in seconds,
      * which is used in the DefaultMaintenanceAccessDeniedHandler.
      */
-    var retryAfter: Duration = Duration.ofSeconds(60)
+    var retryAfter: Int = 60
 }

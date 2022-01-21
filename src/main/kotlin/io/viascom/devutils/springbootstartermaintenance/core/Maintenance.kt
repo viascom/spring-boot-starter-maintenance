@@ -19,7 +19,7 @@ open class Maintenance(
     var active: Boolean = false,
     var roles: MutableList<String> = mutableListOf(),
     var events: Boolean = false,
-    var retryAfter: Duration = Duration.ofSeconds(60)
+    var retryAfter: Int = 60
 ) {
 
     init {

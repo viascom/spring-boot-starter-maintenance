@@ -8,5 +8,5 @@ data class MaintenanceProperties(
     val clean: Boolean,
     val alert: Boolean,
     val events: Boolean,
-    val retryAfter: Duration
+    val retryAfter: Int
 )
