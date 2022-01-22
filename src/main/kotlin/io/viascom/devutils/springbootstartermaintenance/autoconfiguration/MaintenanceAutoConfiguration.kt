@@ -38,7 +38,7 @@ open class MaintenanceAutoConfiguration(
     @Scope("singleton")
     @ConditionalOnMissingBean
     open fun maintenance(): Maintenance {
-        log.debug("Initializing Maintenance")
+        log.debug("Initialized maintenance properties: $properties")
 
         if (properties.events) {
             log.debug("Maintenance events will be published.")

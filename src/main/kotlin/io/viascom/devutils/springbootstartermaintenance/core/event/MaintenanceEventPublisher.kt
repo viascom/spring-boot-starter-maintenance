@@ -6,9 +6,7 @@ import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Component
 
 @Component
-class MaintenanceEventPublisher(
-    private val applicationEventPublisher: ApplicationEventPublisher
-) {
+class MaintenanceEventPublisher(private val applicationEventPublisher: ApplicationEventPublisher) {
 
     private val log = LoggerFactory.getLogger(javaClass)
 

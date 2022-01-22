@@ -19,7 +19,7 @@ open class MaintenanceConfigurationProperties {
     var enabled: Boolean = false
 
     /**
-     * Roles to be allowed the access to the api during a maintenance.
+     * Roles to be allowed the access to the API during a maintenance.
      * This property is case-sensitive.
      */
     var roles: MutableList<String> = arrayListOf()
@@ -35,7 +35,7 @@ open class MaintenanceConfigurationProperties {
     var alert: Boolean = false
 
     /**
-     * Enable to publish spring events for enabling and disabling the maintenance mode.
+     * Enable to publish spring events for maintenance events.
      */
     var events: Boolean = false
 
