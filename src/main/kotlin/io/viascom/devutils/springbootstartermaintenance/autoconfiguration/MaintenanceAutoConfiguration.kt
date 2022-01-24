@@ -52,10 +52,11 @@ open class MaintenanceAutoConfiguration(
             MaintenanceProperties(
                 properties.enabled,
                 properties.roles,
-                properties.clean,
                 properties.alert,
+                properties.clean,
+                properties.retryAfter,
                 properties.events,
-                properties.retryAfter
+                properties.metrics
             ),
             alerts,
             cleaners,

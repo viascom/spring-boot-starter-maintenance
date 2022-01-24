@@ -5,8 +5,9 @@ import java.time.Duration
 data class MaintenanceProperties(
     val enabled: Boolean,
     val roles: MutableList<String>,
-    val clean: Boolean,
     val alert: Boolean,
+    val clean: Boolean,
+    val retryAfter: Int,
     val events: Boolean,
-    val retryAfter: Int
+    val metrics: Boolean,
 )

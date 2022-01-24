@@ -25,14 +25,20 @@ open class MaintenanceConfigurationProperties {
     var roles: MutableList<String> = arrayListOf()
 
     /**
+     * Enable to run all classes implementing the MaintenanceAlert interface during the start maintenance process.
+     */
+    var alert: Boolean = false
+
+    /**
      * Enable to run all classes implementing the MaintenanceCleaner interface during the stop maintenance process.
      */
     var clean: Boolean = false
 
     /**
-     * Enable to run all classes implementing the MaintenanceAlert interface during the start maintenance process.
+     * Default value for the "Retry-After" response HTTP header in seconds,
+     * which is used in the DefaultMaintenanceAccessDeniedHandler.
      */
-    var alert: Boolean = false
+    var retryAfter: Int = 60
 
     /**
      * Enable to publish spring events for maintenance events.
@@ -40,8 +46,7 @@ open class MaintenanceConfigurationProperties {
     var events: Boolean = false
 
     /**
-     * Default value for the "Retry-After" response HTTP header in seconds,
-     * which is used in the DefaultMaintenanceAccessDeniedHandler.
+     * Enable to persist metrics for maintenances.
      */
-    var retryAfter: Int = 60
+    var metrics: Boolean = false
 }

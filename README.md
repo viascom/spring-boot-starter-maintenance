@@ -8,15 +8,16 @@ With spring-boot-starter-maintenance anyone can easily use best practices during
 
 spring-boot-starter-maintenance depends on the following two dependencies and will not start without them present.
 
-- org.springframework.boot:spring-boot-starter-web
-- org.springframework.boot:spring-boot-starter-security
+- org.springframework.boot:spring-boot-starter-web *(required)*
+- org.springframework.boot:spring-boot-starter-security *(required)*
+- org.springframework.boot:spring-boot-starter-data-jpa *(optional, needed only if you enable metrics)*
 
 ### Download
 
 Gradle:
 ```gradle
 dependencies {
-  implementation 'io.viascom.devutils:spring-boot-starter-maintenance:0.0.1'
+  implementation 'io.viascom.devutils:spring-boot-starter-maintenance:0.0.2'
 }
 ```
 
@@ -25,7 +26,7 @@ Maven:
 <dependency>
   <groupId>io.viascom.devutils</groupId>
   <artifactId>spring-boot-starter-maintenance</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
 </dependency>
 ```
 
@@ -60,11 +61,12 @@ All properties can be accessed under the property `maintenance`.
 | Name        | Description                                                                                                                      | Default Value |
 |-------------|----------------------------------------------------------------------------------------------------------------------------------|---------------|
 | enabled     | Enable to instantiate the maintenance mode as active.                                                                            | false         |
-| roles       | Roles to be allowed the access to the API during a maintenance. This property is case-sensitive.                                 | none          |
+| roles       | Roles to be allowed the access to the API during a maintenance. This property is case-sensitive.                                 | *none*        |
 | alert       | Enable to run all classes implementing the MaintenanceAlert interface during the start maintenance process.                      | false         |
 | clean       | Enable to run all classes implementing the MaintenanceCleaner interface during the stop maintenance process.                     | false         |
 | retry-after | Default value for the "Retry-After" response HTTP header in seconds, which is used in the DefaultMaintenanceAccessDeniedHandler. | 60            |
 | events      | Enable to publish spring events for maintenance events.                                                                          | false         |
+| metrics     | Enable to persist metrics for maintenances. Requires spring-boot-starter-data-jpa to work.                                       | false         |
 
 ### Versioning 🔖 [![GitHub release](https://img.shields.io/github/release/viascom/spring-boot-starter-maintenance/all?logo=GitHub)](https://github.com/viascom/spring-boot-starter-maintenance/releases/latest)
 
