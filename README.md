@@ -92,7 +92,7 @@ See also the list of [contributors](https://github.com/viascom/spring-boot-start
 ### Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
-🙏 If you like LeakCanary you can show support by starring ⭐ this repository.
+🙏 If you like spring-boot-starter-maintenance  you can show support by starring ⭐ this repository.
 
 ### License
 
