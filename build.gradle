@@ -12,6 +12,9 @@ plugins {
 group "io.viascom.devutils"
 version "0.0.2"
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 tasks.bootJar {enabled = false}
 tasks.jar {enabled = true}
 
@@ -23,9 +26,6 @@ jar {
 java {
     withJavadocJar()
     withSourcesJar()
-
-    sourceCompatibility = 17
-    targetCompatibility = 1.8
 }
 
 springBoot {
@@ -80,22 +80,21 @@ publishing {
             def snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
             url = isReleaseVersion ? releaseRepo : snapshotRepo
             credentials {
-                username = findProperty("ossrhUsername") ?: System.getenv("MAVEN_USERNAME")
-                password = findProperty("ossrhPassword") ?: System.getenv("MAVEN_PASSWORD")
+                username = findProperty("ossrhUsername") ?: System.getenv("OSSRH_USERNAME")
+                password = findProperty("ossrhPassword") ?: System.getenv("OSSRH_PASSWORD")
             }
         }
     }
 
     publications {
         mavenJava(MavenPublication) {
+            from components.java
             pom {
                 groupId = 'io.viascom.devutils'
                 name = 'spring-boot-starter-maintenance'
                 description = 'Maintenance mode library for spring boot web and security projects.'
                 url = 'https://github.com/viascom/spring-boot-starter-maintenance'
                 packaging = 'jar'
-
-                from components.java
 
                 licenses {
                     license {
@@ -105,9 +104,9 @@ publishing {
                 }
 
                 scm {
-                    connection = 'scm:git:git@github.com:viascom/spring-boot-starter-maintenance.git'
-                    developerConnection = 'scm:git:git@github.com:viascom/spring-boot-starter-maintenance.git'
                     url = 'https://github.com/viascom/spring-boot-starter-maintenance'
+                    connection = 'scm:git://github.com:viascom/spring-boot-starter-maintenance.git'
+                    developerConnection = 'scm:git://github.com:viascom/spring-boot-starter-maintenance.git'
                 }
 
                 developers {
@@ -132,6 +131,7 @@ publishing {
 signing {
     sign publishing.publications.mavenJava
 }
+
 tasks.withType(Sign) {
     onlyIf { isReleaseVersion }
 }
