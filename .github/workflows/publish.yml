@@ -70,7 +70,7 @@ jobs:
           base64 -d ~/.gradle/secring.gpg.b64 > ~/.gradle/secring.gpg
 
       - name: List content of ~/.gradle
-        working-directory: ~/.gradle
+        working-directory: ./.gradle
         run: |
           ls -la
 
