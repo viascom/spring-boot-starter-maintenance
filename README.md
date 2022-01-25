@@ -1,10 +1,16 @@
-# spring-boot-starter-maintenance ![Build Status](https://github.com/viascom/spring-boot-starter-maintenance/actions/workflows/build.yml/badge.svg)
+# spring-boot-starter-maintenance 
+![Build Status](https://github.com/viascom/spring-boot-starter-maintenance/actions/workflows/build.yml/badge.svg)
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.viascom.devutils/spring-boot-starter-maintenance/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.viascom.devutils/spring-boot-starter-maintenance/)
+
 
 spring-boot-starter-maintenance is a maintenance mode library and auto-configuration for spring boot web and security projects.
 
 With spring-boot-starter-maintenance anyone can easily use best practices during maintenance work on their applications. In fact, every HTTP client will receive a response with status code 503 - Service Unavailable during maintenance. This library provides injection points for alert- and clean-up tasks and detailed metrics. Everything is customizable and extendable programmed.
 
 ### Requirements
+
+JDK >= 1.8
 
 spring-boot-starter-maintenance depends on the following two dependencies and will not start without them present.
 
@@ -82,6 +88,11 @@ See the [CHANGELOG](CHANGELOG.md) file for details.
 * **Patrick Bösch** - *Initial work* - [itsmefox](https://github.com/itsmefox)
 
 See also the list of [contributors](https://github.com/viascom/spring-boot-starter-maintenance/contributors) who participated in this project. 💕
+
+### Contributing
+See [CONTRIBUTING.md](CONTRIBUTING.md) file.
+
+🙏 If you like LeakCanary you can show support by starring ⭐ this repository.
 
 ### License
 
