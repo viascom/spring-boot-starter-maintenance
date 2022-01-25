@@ -71,6 +71,7 @@ jobs:
           cd ~/.gradle/
           ls -la
           echo ~/.gradle/secring.gpg
+          pwd
 
       - name: Publish package
         run: ./gradlew publish -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} -Psigning.password=${{secrets.SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg) --warn --full-stacktrace
