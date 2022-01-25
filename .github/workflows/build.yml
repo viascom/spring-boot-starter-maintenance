@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - 'main'
+      - '*'
     paths-ignore:
       - '**.md'
       - '.github/**'
@@ -14,6 +14,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        java: [ '8', '11', '17' ]
+
     steps:
       - name: Setup timezone
         uses: zcong1993/setup-timezone@master
@@ -23,12 +28,14 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v2.4.0
 
-      - name: Set up JDK 11
+      - name: Set up Java ${{ matrix.Java }} JDK
         uses: actions/setup-java@v2
         with:
-          distribution: 'adopt'
-          java-version: 11
+          distribution: 'temurin'
+          java-version: ${{ matrix.java }}
           architecture: x64
+          cache: 'gradle'
+          check-latest: true
 
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
@@ -47,7 +54,7 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Build with Gradle
-        run: ./gradlew build --warn --stacktrace
+        run: ./gradlew build --warn --full-stacktrace
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
