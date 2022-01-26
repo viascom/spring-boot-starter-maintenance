@@ -5,40 +5,8 @@ on:
   release:
     types: [created]
 jobs:
-  build:
-    name: Build Release Artifacts
-    runs-on: ubuntu-latest
-    steps:
-      - name: Setup timezone
-        uses: zcong1993/setup-timezone@master
-        with:
-          timezone: Europe/Zurich
-
-      - name: Check out the repo
-        uses: actions/checkout@v2.4.0
-
-      - name: Set up Java 8 JDK
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'temurin'
-          java-version: 8
-          architecture: x64
-          cache: 'gradle'
-          check-latest: true
-
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
-
-      - name: Change wrapper permissions
-        run: chmod +x ./gradlew
-
-      - name: Build package
-        run: ./gradlew build --warn --full-stacktrace
-
   publish:
     name: Publish Release Artifacts
-    needs: [ build ]
-#    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Setup timezone
