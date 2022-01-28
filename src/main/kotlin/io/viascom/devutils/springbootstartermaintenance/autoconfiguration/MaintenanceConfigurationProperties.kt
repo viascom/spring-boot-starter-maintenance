@@ -44,9 +44,4 @@ open class MaintenanceConfigurationProperties {
      * Enable to publish spring events for maintenance events.
      */
     var events: Boolean = false
-
-    /**
-     * Enable to persist metrics for maintenances.
-     */
-    var metrics: Boolean = false
 }

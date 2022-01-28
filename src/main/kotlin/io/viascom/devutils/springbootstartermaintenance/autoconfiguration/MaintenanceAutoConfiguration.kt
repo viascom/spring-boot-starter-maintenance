@@ -55,8 +55,7 @@ open class MaintenanceAutoConfiguration(
                 properties.alert,
                 properties.clean,
                 properties.retryAfter,
-                properties.events,
-                properties.metrics
+                properties.events
             ),
             alerts,
             cleaners,
