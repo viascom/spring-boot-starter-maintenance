@@ -4,9 +4,9 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.viascom.devutils/spring-boot-starter-maintenance/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.viascom.devutils/spring-boot-starter-maintenance/)
 
 
-**spring-boot-starter-maintenance** is an extensible auto-configuration library for spring boot web and security projects supporting Java and Kotlin applications to block access to this application during maintenances and still provide an open door for the maintainers.
+**spring-boot-starter-maintenance** is an extensible auto-configuration library for spring boot web and security projects supporting Java and Kotlin applications to block access to your application during maintenances and still provide a secure open door for your maintainers.
 
-With spring-boot-starter-maintenance anyone can easily use best practices during maintenance work on their applications. In fact, every HTTP client will receive a response with status code 503 - Service Unavailable during maintenance. This library provides injection points for alert- and clean-up tasks.
+With spring-boot-starter-maintenance anyone can easily make use of best practices during maintenance work on their applications. In fact, every HTTP client will receive a response with status code 503 - Service Unavailable during maintenance. This library provides additionally injection points for alert- and clean-up tasks.
 
 spring-boot-starter-maintenance is ready to use out of the box for most common setups. Even for uncommon applications and technologies, it should be simple to implement the necessary interfaces to connect a library/framework/etc. to it.
 
@@ -68,7 +68,7 @@ private Maintenance maintenance;
 maintenance:
   enabled: true
   roles:
-    - MAINTAINER
+    - ADMIN
 ```
 
 ### Full configuration example
