@@ -15,7 +15,7 @@ jobs:
           timezone: Europe/Zurich
 
       - name: Check out the repo
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
 
       - name: Set up Java 8 JDK
         uses: actions/setup-java@v2
