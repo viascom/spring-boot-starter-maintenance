@@ -26,7 +26,7 @@ jobs:
           timezone: Europe/Zurich
 
       - name: Check out the repo
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
 
       - name: Set up Java ${{ matrix.Java }} JDK
         uses: actions/setup-java@v2
