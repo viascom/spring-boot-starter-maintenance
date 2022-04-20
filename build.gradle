@@ -10,7 +10,7 @@ plugins {
 }
 
 group "io.viascom.devutils"
-version "0.0.2-SNASHOT"
+version "0.0.2-SNAPSHOT"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
