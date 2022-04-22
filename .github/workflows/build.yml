@@ -59,4 +59,4 @@ jobs:
         with:
           name: build-libs-java-${{ matrix.Java }}
           path: build/libs
-          retention-days: 90
+          retention-days: 3
