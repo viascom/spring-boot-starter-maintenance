@@ -48,4 +48,4 @@ jobs:
         with:
           name: release-build-libs
           path: build/libs
-          retention-days: 90
+          retention-days: 3
