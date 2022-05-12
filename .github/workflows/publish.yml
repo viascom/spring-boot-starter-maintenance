@@ -32,6 +32,11 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
+      - name: Test
+        run: |
+          cd ~/.gradle
+          ls -alF
+
       - name: Decode GPG Key
         run: |
           echo "${{secrets.SIGNING_SECRET_KEY_RING_FILE}}" > ~/.gradle/secring.gpg.b64
