@@ -7,13 +7,14 @@ on:
 
 jobs:
   update-gradle-wrapper:
-    runs-on: ubuntu-latest
+    name: Daily check to upgrade Gradle Wrapper
+    runs-on: self-hosted
 
     steps:
       - name: Setup timezone
-        uses: zcong1993/setup-timezone@master
-        with:
-          timezone: Europe/Zurich
+        run: |
+          sudo timedatectl set-timezone Europe/Zurich
+          timedatectl
 
       - uses: actions/checkout@v3
 
