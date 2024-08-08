@@ -1,11 +1,11 @@
 package io.viascom.devutils.springbootstartermaintenance.security
 
 import io.viascom.devutils.springbootstartermaintenance.core.Maintenance
+import jakarta.servlet.http.HttpServletRequest
 import org.slf4j.LoggerFactory
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.util.matcher.RequestMatcher
-import javax.servlet.http.HttpServletRequest
 
 open class DefaultMaintenanceRequestMatcher(private val maintenance: Maintenance) : RequestMatcher {
 

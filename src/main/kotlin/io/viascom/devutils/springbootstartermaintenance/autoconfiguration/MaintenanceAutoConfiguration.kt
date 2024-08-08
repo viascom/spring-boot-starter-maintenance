@@ -7,14 +7,17 @@ import io.viascom.devutils.springbootstartermaintenance.core.config.MaintenanceP
 import io.viascom.devutils.springbootstartermaintenance.core.event.MaintenanceEventPublisher
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication
+import org.springframework.boot.autoconfigure.security.ConditionalOnDefaultWebSecurity
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Scope
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.web.SecurityFilterChain
 
 /**
  * Maintenance autoconfiguration for spring boot projects
@@ -22,7 +25,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  */
 @Configuration
 @ConditionalOnWebApplication
-@ConditionalOnBean(WebSecurityConfigurerAdapter::class)
+@ConditionalOnClass(SecurityFilterChain::class, HttpSecurity::class)
 @EnableConfigurationProperties(MaintenanceConfigurationProperties::class)
 @ComponentScan(basePackages = ["io.viascom.devutils.springbootstartermaintenance.*"])
 open class MaintenanceAutoConfiguration(
@@ -38,7 +41,7 @@ open class MaintenanceAutoConfiguration(
     @Scope("singleton")
     @ConditionalOnMissingBean
     open fun maintenance(): Maintenance {
-        log.debug("Initialized maintenance properties: $properties")
+        log.debug("Initialized maintenance properties: {}", properties)
 
         if (properties.events) {
             log.debug("Maintenance events will be published.")

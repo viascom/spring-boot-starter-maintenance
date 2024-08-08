@@ -3,13 +3,13 @@ package io.viascom.devutils.springbootstartermaintenance.security
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.viascom.devutils.springbootstartermaintenance.core.Maintenance
 import io.viascom.devutils.springbootstartermaintenance.core.model.MaintenanceError
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.security.web.access.AccessDeniedHandler
 import java.time.Duration
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 @Suppress("unused")
 open class DefaultMaintenanceAccessDeniedHandler(private val maintenance: Maintenance) : AccessDeniedHandler {

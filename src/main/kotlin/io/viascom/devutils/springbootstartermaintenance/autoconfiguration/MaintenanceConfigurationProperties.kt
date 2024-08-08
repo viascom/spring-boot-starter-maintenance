@@ -1,7 +1,6 @@
 package io.viascom.devutils.springbootstartermaintenance.autoconfiguration
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import java.time.Duration
 
 /**
  *  Maintenance configuration properties

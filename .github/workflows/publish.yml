@@ -3,7 +3,7 @@ name: Publish
 on:
   workflow_dispatch:
   release:
-    types: [created]
+    types: [ created ]
 jobs:
   publish:
     name: Publish Release Artifacts

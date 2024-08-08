@@ -1,22 +1,26 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id "idea"
     id "java-library"
     id "maven-publish"
     id "signing"
-    id "org.jetbrains.kotlin.jvm" version "2.0.0"
     id "org.springframework.boot" version "3.3.2"
-    id "org.jetbrains.kotlin.kapt" version "2.0.0"
-	  id "io.spring.dependency-management" version "1.1.6"
+    id "org.jetbrains.kotlin.jvm" version "2.0.10"
+    id "org.jetbrains.kotlin.kapt" version "2.0.10"
+    id "io.spring.dependency-management" version "1.1.6"
 }
 
 group "io.viascom.devutils"
 version "0.0.2"
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
 
-tasks.bootJar {enabled = false}
-tasks.jar {enabled = true}
+tasks.bootJar { enabled = false }
+tasks.jar { enabled = true }
 
 jar {
     // Remove `plain` postfix from jar file name
@@ -57,12 +61,15 @@ test {
     useJUnitPlatform()
 }
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+tasks.withType(KotlinCompile).configureEach {
     kotlinOptions {
-        freeCompilerArgs = ["-Xjsr305=strict"]
-        jvmTarget = "1.8"
+        freeCompilerArgs += '-Xjsr305=strict'
+        jvmTarget = '21'
     }
 }
+
+//Wait for files from processResources and bootBuildInfo
+compileKotlin.inputs.files(processResources, bootBuildInfo)
 
 classes {
     doLast {
@@ -111,7 +118,7 @@ publishing {
 
                 developers {
                     developer {
-                        id = 'botscripter'
+                        id = 'nik-sta'
                         name = 'Nikola Stankovic'
                         email = 'nikola.stankovic@viascom.email'
                         organizationUrl = 'https://viascom.io/'
@@ -132,13 +139,6 @@ signing {
     sign publishing.publications.mavenJava
 }
 
-tasks.withType(Sign) {
+tasks.withType(Sign).configureEach {
     onlyIf { isReleaseVersion }
-}
-
-gradleEnterprise {
-    buildScan {
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        termsOfServiceAgree = "yes"
-    }
 }

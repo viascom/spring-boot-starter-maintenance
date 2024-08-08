@@ -4,7 +4,6 @@ import io.viascom.devutils.springbootstartermaintenance.core.config.MaintenanceP
 import io.viascom.devutils.springbootstartermaintenance.core.event.MaintenanceEventPublisher
 import io.viascom.devutils.springbootstartermaintenance.core.model.MaintenanceState
 import org.slf4j.LoggerFactory
-import java.time.Duration
 import java.time.LocalDateTime
 import java.time.LocalDateTime.now
 

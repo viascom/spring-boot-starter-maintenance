@@ -1,14 +1,19 @@
-# spring-boot-starter-maintenance 
+# spring-boot-starter-maintenance
+
 ![Build Status](https://github.com/viascom/spring-boot-starter-maintenance/actions/workflows/build.yml/badge.svg)
 [![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.viascom.devutils/spring-boot-starter-maintenance/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.viascom.devutils/spring-boot-starter-maintenance/)
 
+**spring-boot-starter-maintenance** is an extensible auto-configuration library for spring boot web and security
+projects supporting Java and Kotlin applications to block access to your application during maintenances and still
+provide a secure open door for your maintainers.
 
-**spring-boot-starter-maintenance** is an extensible auto-configuration library for spring boot web and security projects supporting Java and Kotlin applications to block access to your application during maintenances and still provide a secure open door for your maintainers.
+With spring-boot-starter-maintenance anyone can easily make use of best practices during maintenance work on their
+applications. In fact, every HTTP client will receive a response with status code 503 - Service Unavailable during
+maintenance. This library provides additionally injection points for alert- and clean-up tasks.
 
-With spring-boot-starter-maintenance anyone can easily make use of best practices during maintenance work on their applications. In fact, every HTTP client will receive a response with status code 503 - Service Unavailable during maintenance. This library provides additionally injection points for alert- and clean-up tasks.
-
-spring-boot-starter-maintenance is ready to use out of the box for most common setups. Even for uncommon applications and technologies, it should be simple to implement the necessary interfaces to connect a library/framework/etc. to it.
+spring-boot-starter-maintenance is ready to use out of the box for most common setups. Even for uncommon applications
+and technologies, it should be simple to implement the necessary interfaces to connect a library/framework/etc. to it.
 
 ## Requirements
 
@@ -22,6 +27,7 @@ spring-boot-starter-maintenance depends on the following two dependencies and wi
 ## Download
 
 Gradle:
+
 ```gradle
 dependencies {
   implementation 'io.viascom.devutils:spring-boot-starter-maintenance:0.0.1'
@@ -29,6 +35,7 @@ dependencies {
 ```
 
 Maven:
+
 ```xml
 <dependency>
   <groupId>io.viascom.devutils</groupId>
@@ -37,29 +44,35 @@ Maven:
 </dependency>
 ```
 
-[spring-boot-starter-maintenance jar downloads](https://maven-badges.herokuapp.com/maven-central/io.viascom.devutils/spring-boot-starter-maintenance) are available from Maven Central.
+[spring-boot-starter-maintenance jar downloads](https://maven-badges.herokuapp.com/maven-central/io.viascom.devutils/spring-boot-starter-maintenance)
+are available from Maven Central.
 
 ## Getting Started
 
-Open your implementation of the WebSecurityConfigurerAdapter (f.e. named WebSecurityConfig) and add the following three parts:
+Open your implementation of the WebSecurityConfigurerAdapter (f.e. named WebSecurityConfig) and add the following three
+parts:
 
 **Step 1:** Autowire maintenance
+
 ```java
 @Autowired
 private Maintenance maintenance;
 ```
 
 **Step 2:** Add a request matcher
+
 ```java
 .authorizeRequests()
 .requestMatchers(new DefaultMaintenanceRequestMatcher(maintenance)).denyAll()
 ```
 
 **Step 3:** Add a access denie handler
+
 ```java
 .exceptionHandling()
 .accessDeniedHandler(new DefaultMaintenanceAccessDeniedHandler(maintenance))
 ```
+
 ## Configuration Properties
 
 ### Basic configuration example
@@ -72,6 +85,7 @@ maintenance:
 ```
 
 ### Full configuration example
+
 ```yaml
 maintenance:
   enabled: true
@@ -83,6 +97,7 @@ maintenance:
   retry-after: 30
   events: true
 ```
+
 ### Maintenance properties
 
 All properties can be accessed under the property `maintenance`.
@@ -98,7 +113,9 @@ All properties can be accessed under the property `maintenance`.
 
 ## Versioning 🔖 [![GitHub release](https://img.shields.io/github/release/viascom/spring-boot-starter-maintenance/all?logo=GitHub)](https://github.com/viascom/spring-boot-starter-maintenance/releases/latest)
 
-This project is developed by [Viascom](https://github.com/viascom) using the [Semantic Versioning specification](https://semver.org). For the versions available, see the [releases on this repository](https://github.com/viascom/spring-boot-starter-maintenance/releases).
+This project is developed by [Viascom](https://github.com/viascom) using
+the [Semantic Versioning specification](https://semver.org). For the versions available, see
+the [releases on this repository](https://github.com/viascom/spring-boot-starter-maintenance/releases).
 
 ## Change log 📝
 
@@ -109,12 +126,14 @@ See the [CHANGELOG](CHANGELOG.md) file for details.
 * **Nikola Stanković** - *Initial work* - [botscripter](https://github.com/botscripter)
 * **Patrick Bösch** - *Initial work* - [itsmefox](https://github.com/itsmefox)
 
-See also the list of [contributors](https://github.com/viascom/spring-boot-starter-maintenance/contributors) who participated in this project. 💕
+See also the list of [contributors](https://github.com/viascom/spring-boot-starter-maintenance/contributors) who
+participated in this project. 💕
 
 ## Contributing
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
-🙏 If you like spring-boot-starter-maintenance  you can show support by starring ⭐ this repository.
+🙏 If you like spring-boot-starter-maintenance you can show support by starring ⭐ this repository.
 
 ## License
 
