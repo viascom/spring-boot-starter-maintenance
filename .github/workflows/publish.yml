@@ -4,17 +4,16 @@ on:
   workflow_dispatch:
   release:
     types: [ created ]
+
+env:
+  TZ: Europe/Zurich
+
 jobs:
   publish:
     name: Publish Release Artifacts
     runs-on: self-hosted
 
     steps:
-      - name: Setup timezone
-        run: |
-          sudo timedatectl set-timezone Europe/Zurich
-          timedatectl
-
       - name: Check out the repo
         uses: actions/checkout@v4
 
@@ -33,15 +32,20 @@ jobs:
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
 
+      # The keyring lives in RUNNER_TEMP, which the runner empties after the job, never in the shared home.
       - name: Decode GPG Key
-        run: |
-          mkdir -p ~/.gradle/
-          echo "${{secrets.SIGNING_SECRET_KEY_RING_FILE}}" > ~/.gradle/secring.gpg.b64
-          base64 -d ~/.gradle/secring.gpg.b64 > ~/.gradle/secring.gpg
-
-      - name: Publish package
-        run: ./gradlew publish -Psigning.keyId=${{secrets.SIGNING_KEY_ID}} -Psigning.password=${{secrets.SIGNING_PASSWORD}} -Psigning.secretKeyRingFile=$(echo ~/.gradle/secring.gpg) --warn --stacktrace
+        run: printf '%s' "$SIGNING_SECRET_KEY_RING_FILE" | base64 -d > "$RUNNER_TEMP/secring.gpg"
         env:
+          SIGNING_SECRET_KEY_RING_FILE: ${{secrets.SIGNING_SECRET_KEY_RING_FILE}}
+
+      # Signing properties go in as env, not -P arguments, so they stay out of the process list.
+      # bash runs the wrapper because dash, Debian's /bin/sh, drops env vars with a dot in the name.
+      - name: Publish package
+        run: bash ./gradlew publish --warn --stacktrace
+        env:
+          ORG_GRADLE_PROJECT_signing.keyId: ${{secrets.SIGNING_KEY_ID}}
+          ORG_GRADLE_PROJECT_signing.password: ${{secrets.SIGNING_PASSWORD}}
+          ORG_GRADLE_PROJECT_signing.secretKeyRingFile: ${{runner.temp}}/secring.gpg
           OSSRH_USERNAME: ${{secrets.OSSRH_USERNAME}}
           OSSRH_PASSWORD: ${{secrets.OSSRH_PASSWORD}}
 
