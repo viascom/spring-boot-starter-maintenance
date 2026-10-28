@@ -9,6 +9,9 @@ on:
       - '.github/**'
   workflow_dispatch:
 
+env:
+  TZ: Europe/Zurich
+
 jobs:
   build:
     name: Build Pipeline
@@ -19,12 +22,6 @@ jobs:
         java: [ '8', '11', '17' ]
 
     steps:
-      - name: Setup timezone
-        run: |
-          timedatectl
-          sudo timedatectl set-timezone Europe/Zurich
-          timedatectl
-
       - name: Check out the repo
         uses: actions/checkout@v4
 
