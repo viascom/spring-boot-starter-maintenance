@@ -23,7 +23,6 @@ jobs:
           distribution: 'temurin'
           java-version: 8
           architecture: x64
-          cache: 'gradle'
           check-latest: true
 
       - name: Validate Gradle wrapper
