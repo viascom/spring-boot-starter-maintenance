@@ -31,7 +31,6 @@ jobs:
           distribution: 'temurin'
           java-version: ${{ matrix.java }}
           architecture: x64
-          cache: 'gradle'
           check-latest: true
 
       - name: Validate Gradle wrapper
@@ -39,16 +38,6 @@ jobs:
 
       - name: Change wrapper permissions
         run: chmod +x ./gradlew
-
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
 
       - name: Build with Gradle
         run: ./gradlew build --warn --stacktrace --scan
